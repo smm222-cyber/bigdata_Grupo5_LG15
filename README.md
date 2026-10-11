@@ -206,8 +206,7 @@ Evidencias:
 
 ## 7. Tabla comparativa
 
-> ## 6. Comparación entre los experimentos de 1 GB y 10 GB
-
+> 
 Comparamos las dos pruebas de tolerancia a fallos: se detuvo un DataNode con `docker stop` y se observó cómo HDFS mantiene el archivo disponible y restablece la replicación.
 
 | Característica | Dataset 1 GB | Dataset 10 GB |
