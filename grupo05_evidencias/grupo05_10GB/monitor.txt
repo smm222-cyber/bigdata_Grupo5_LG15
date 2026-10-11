@@ -1,0 +1,27 @@
+﻿=== GRUPO 05 | monitor 10GB | inicio 2026-10-11 18:34:48 ===
+18:34:51 (+0,1 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:35:23 (+0,6 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:35:58 (+1,2 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:36:31 (+1,7 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:37:03 (+2,3 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:37:36 (+2,8 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:38:09 (+3,4 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:38:43 (+3,9 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:39:15 (+4,5 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:39:48 (+5 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:40:21 (+5,6 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:40:54 (+6,1 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:41:27 (+6,7 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:41:59 (+7,2 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:42:32 (+7,7 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:43:05 (+8,3 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:43:38 (+8,8 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:44:11 (+9,4 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:44:44 (+9,9 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0
+>>> DataNode declarado caído en +9.9 min
+18:45:16 (+10,5 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0
+18:45:49 (+11 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0
+18:46:21 (+11,6 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0
+18:46:54 (+12,1 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0
+18:47:27 (+12,6 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0
+18:47:59 (+13,2 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0

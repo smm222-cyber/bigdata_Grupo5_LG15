@@ -6,3 +6,5 @@
 18:13:38 (+17 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
 18:14:10 (+17,5 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
 18:14:42 (+18 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:15:14 (+18,6 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:15:46 (+19,1 min) | Live datanodes (3): |  | 	Under replicated blocks: 0

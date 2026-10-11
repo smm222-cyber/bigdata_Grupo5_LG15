@@ -1,0 +1,3 @@
+﻿18:50:04 (+0,1 min desde ahora) | Under-replicated (fsck): 21
+18:50:37 (+0,6 min desde ahora) | Under-replicated (fsck): 2
+18:51:09 (+1,2 min desde ahora) | Under-replicated (fsck): 0
