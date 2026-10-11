@@ -307,3 +307,61 @@ están organizadas en `grupo05_1GB/` y `grupo05_10GB/`.
 - La disponibilidad del archivo y el cumplimiento del factor de replicación
   son propiedades diferentes: el archivo puede seguir leyéndose mientras
   existen bloques temporalmente subreplicados.
+
+## 11. Análisis
+
+### Antes de la falla
+
+| Pregunta | Prueba de 1 GB | Prueba de 10 GB |
+|---|---|---|
+| ¿Cuántos bloques tenía el archivo? | 8 bloques de 128 MB | 80 bloques de 128 MB |
+| ¿Cuántas réplicas tenía cada bloque? | 2 (`Live_repl=2`) | 2 (promedio de replicación 2,0) |
+| ¿En qué DataNodes estaban? | DN1 guardaba 2 bloques, DN2 guardaba 7 y DN3 guardaba 7. Cada bloque estaba en una pareja de nodos (ver tabla de abajo). | Repartidos entre los tres nodos: DN1 = 63, DN2 = 58 y DN3 = 55 bloques. Estas cifras incluyen los 8 bloques del dataset de 1 GB, que seguía en HDFS. La ubicación de cada bloque está en el `fsck` inicial. |
+
+Estado inicial en ambas pruebas: DN1 → Activo, DN2 → Activo, DN3 → Activo, con el archivo en estado `HEALTHY`.
+
+Ubicación de las réplicas del dataset de 1 GB:
+
+| Bloque | Réplica 1 | Réplica 2 |
+|---|---|---|
+| 0 | DN3 | DN2 |
+| 1 | DN2 | DN3 |
+| 2 | DN3 | DN2 |
+| 3 | DN2 | DN3 |
+| 4 | DN3 | DN2 |
+| 5 | DN3 | DN2 |
+| 6 | DN3 | DN1 |
+| 7 | DN2 | DN1 |
+
+### Durante la falla
+
+| Pregunta | Prueba de 1 GB | Prueba de 10 GB |
+|---|---|---|
+| ¿Qué DataNode fue detenido? | DN2 (`grupo05-datanode2`, 172.19.0.6) | DN3 (`grupo05-datanode3`, 172.19.0.5) |
+| ¿Qué bloques estaban almacenados en él? | 7 de los 8 bloques: 0, 1, 2, 3, 4, 5 y 7 | 47 bloques del archivo (los que aparecieron subreplicados) |
+| ¿Existían otras réplicas? | Sí. Cada uno de esos bloques tenía su segunda copia en DN1 o DN3. | Sí. Los 47 bloques conservaban una réplica en DN1 o DN2; no hubo bloques faltantes. |
+| ¿El archivo continuó disponible? | Sí. Se pudo leer completo y el hash MD5 fue idéntico al de antes de la falla. | Sí. Se leyeron 10 737 418 240 bytes, igual que antes. |
+| ¿Qué cambió en HDFS? | Al principio nada: el NameNode seguía mostrando 3 nodos vivos. Después de unos 10 minutos sin heartbeats, DN2 pasó a estado caído. | Igual: primero sin cambios y luego DN3 pasó a *Dead*. El `fsck` mostró 2 DataNodes, 47 bloques subreplicados (58,75 %), 47 réplicas faltantes y promedio de replicación 1,41. El estado del archivo siguió en `HEALTHY`. |
+
+Mientras el NameNode todavía no había declarado caído al nodo, el cliente que intentó leer de él recibió el error `No route to host`, lo marcó como nodo muerto y leyó el bloque desde otra réplica. Estado durante la falla: en 1 GB, DN1 y DN3 activos y DN2 en FALLA; en 10 GB, DN1 y DN2 activos y DN3 en FALLA.
+
+### Después de la falla
+
+| Pregunta | Prueba de 1 GB | Prueba de 10 GB |
+|---|---|---|
+| ¿Qué estado reporta HDFS? | `HEALTHY`, sin bloques faltantes ni corruptos | `HEALTHY`, sin bloques faltantes ni corruptos, con 2 DataNodes vivos |
+| ¿Existen bloques subreplicados? | Los bloques con copia en DN2 quedaron con una sola réplica al declararse caído el nodo. Al terminar la recuperación, 0. | Sí, 47 bloques al declararse caído DN3. Al terminar la recuperación, 0. |
+| ¿HDFS intenta recuperar automáticamente las réplicas? | Sí, sin intervención de nuestra parte. | Sí. El conteo bajó 47 → 21 → 2 → 0 y el promedio de replicación volvió a 2,0. |
+| ¿En qué DataNode se generaron las nuevas réplicas? | Solo podían crearse en los nodos vivos que no tenían el bloque: los bloques 0 a 5 se copiaron a DN1 y el bloque 7 a DN3. | Solo en los nodos vivos, DN1 y DN2. Ya no quedó ninguna réplica apuntando a la IP de DN3. |
+
+Al reiniciar el DataNode detenido, el clúster volvió a mostrar 3 DataNodes vivos.
+
+### Por qué ocurrió
+
+HDFS divide cada archivo en bloques y guarda cada bloque en varios DataNodes según el factor de replicación (aquí, 2). El NameNode mantiene el mapa de qué bloque está en qué nodo y recibe de cada DataNode heartbeats periódicos e informes de bloques.
+
+Al detener un DataNode, el NameNode no se entera de inmediato. Espera hasta acumular el tiempo límite sin heartbeats (con la configuración por defecto, unos 10 minutos) y recién entonces lo declara muerto. Mientras tanto, la lectura funciona porque el cliente prueba con otra réplica de cada bloque.
+
+Cuando el nodo se declara caído, el NameNode marca como subreplicados todos los bloques que tenían una copia allí, porque pasaron de 2 réplicas a 1. A continuación programa su copia: toma la réplica que sobrevive y la envía a otro DataNode vivo que todavía no tenga ese bloque, hasta volver al factor de replicación 2. Por eso el archivo estuvo siempre disponible, aunque durante un tiempo no cumplió el factor de replicación, y por eso las nuevas réplicas solo aparecen en los DataNodes que seguían activos.
+
+En 10 GB hubo más bloques afectados (47 frente a 7) y la recuperación llevó más trabajo, porque hay que copiar más datos entre los nodos que quedan.
