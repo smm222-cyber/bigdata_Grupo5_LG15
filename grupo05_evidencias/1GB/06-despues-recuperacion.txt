@@ -1,0 +1,137 @@
+﻿=== GRUPO 05 | 1GB | 06-despues-recuperacion | 2026-10-11 18:11:11 ===
+--- hdfs dfsadmin -report ---
+Configured Capacity: 2162202353664 (1.97 TB)
+Present Capacity: 2040092729393 (1.86 TB)
+DFS Remaining: 2037928321024 (1.85 TB)
+DFS Used: 2164408369 (2.02 GB)
+DFS Used%: 0.11%
+Replicated Blocks:
+	Under replicated blocks: 0
+	Blocks with corrupt replicas: 0
+	Missing blocks: 0
+	Missing blocks (with replication factor 1): 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+Erasure Coded Block Groups: 
+	Low redundancy block groups: 0
+	Block groups with corrupt internal blocks: 0
+	Missing block groups: 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+
+-------------------------------------------------
+Live datanodes (2):
+
+Name: 172.19.0.4:9866 (grupo05-datanode1.bigdata_grupo5_lg15_default)
+Hostname: 55cd13343fe3
+Decommission Status : Normal
+Configured Capacity: 1081101176832 (1006.85 GB)
+DFS Used: 1082183722 (1.01 GB)
+Non DFS Used: 6062477270 (5.65 GB)
+DFS Remaining: 1018964160512 (948.98 GB)
+DFS Used%: 0.10%
+DFS Remaining%: 94.25%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 1
+Last contact: Sun Oct 11 22:11:11 GMT 2026
+Last Block Report: Sun Oct 11 21:24:02 GMT 2026
+Num of Blocks: 8
+
+
+Name: 172.19.0.5:9866 (grupo05-datanode3.bigdata_grupo5_lg15_default)
+Hostname: acd012f2ffda
+Decommission Status : Normal
+Configured Capacity: 1081101176832 (1006.85 GB)
+DFS Used: 1082224647 (1.01 GB)
+Non DFS Used: 6062436345 (5.65 GB)
+DFS Remaining: 1018964160512 (948.98 GB)
+DFS Used%: 0.10%
+DFS Remaining%: 94.25%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 1
+Last contact: Sun Oct 11 22:11:11 GMT 2026
+Last Block Report: Sun Oct 11 21:24:02 GMT 2026
+Num of Blocks: 8
+
+
+Dead datanodes (1):
+
+Name: 172.19.0.6:9866 (172.19.0.6)
+Hostname: 096fc50dc191
+Decommission Status : Normal
+Configured Capacity: 1081101176832 (1006.85 GB)
+DFS Used: 946958336 (903.09 MB)
+Non DFS Used: 5250768896 (4.89 GB)
+DFS Remaining: 1019911094272 (949.87 GB)
+DFS Used%: 0.09%
+DFS Remaining%: 94.34%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 0
+Last contact: Sun Oct 11 21:55:50 GMT 2026
+Last Block Report: Sun Oct 11 21:24:02 GMT 2026
+Num of Blocks: 0
+
+
+--- hdfs fsck /grupo05/dataset_1GB -files -blocks -locations ---
+Connecting to namenode via http://namenode:9870/fsck?ugi=root&files=1&blocks=1&locations=1&path=%2Fgrupo05%2Fdataset_1GB
+FSCK started by root (auth:SIMPLE) from /172.19.0.2 for path /grupo05/dataset_1GB at Sun Oct 11 22:11:15 GMT 2026
+/grupo05/dataset_1GB <dir>
+/grupo05/dataset_1GB/dataset_grupo05_1GB 1073741824 bytes, replicated: replication=2, 8 block(s):  OK
+0. BP-1054772319-172.19.0.3-1791753837554:blk_1073741825_1001 len=134217728 Live_repl=2  [DatanodeInfoWithStorage[172.19.0.5:9866,DS-0ec1222b-f092-47e9-8f6a-728786e73d0a,DISK], DatanodeInfoWithStorage[172.19.0.4:9866,DS-09a6ff3c-aac0-4d9c-a66b-7171c3a1a81e,DISK]]
+1. BP-1054772319-172.19.0.3-1791753837554:blk_1073741826_1002 len=134217728 Live_repl=2  [DatanodeInfoWithStorage[172.19.0.5:9866,DS-0ec1222b-f092-47e9-8f6a-728786e73d0a,DISK], DatanodeInfoWithStorage[172.19.0.4:9866,DS-09a6ff3c-aac0-4d9c-a66b-7171c3a1a81e,DISK]]
+2. BP-1054772319-172.19.0.3-1791753837554:blk_1073741827_1003 len=134217728 Live_repl=2  [DatanodeInfoWithStorage[172.19.0.5:9866,DS-0ec1222b-f092-47e9-8f6a-728786e73d0a,DISK], DatanodeInfoWithStorage[172.19.0.4:9866,DS-09a6ff3c-aac0-4d9c-a66b-7171c3a1a81e,DISK]]
+3. BP-1054772319-172.19.0.3-1791753837554:blk_1073741828_1004 len=134217728 Live_repl=2  [DatanodeInfoWithStorage[172.19.0.5:9866,DS-0ec1222b-f092-47e9-8f6a-728786e73d0a,DISK], DatanodeInfoWithStorage[172.19.0.4:9866,DS-09a6ff3c-aac0-4d9c-a66b-7171c3a1a81e,DISK]]
+4. BP-1054772319-172.19.0.3-1791753837554:blk_1073741829_1005 len=134217728 Live_repl=2  [DatanodeInfoWithStorage[172.19.0.5:9866,DS-0ec1222b-f092-47e9-8f6a-728786e73d0a,DISK], DatanodeInfoWithStorage[172.19.0.4:9866,DS-09a6ff3c-aac0-4d9c-a66b-7171c3a1a81e,DISK]]
+5. BP-1054772319-172.19.0.3-1791753837554:blk_1073741830_1006 len=134217728 Live_repl=2  [DatanodeInfoWithStorage[172.19.0.5:9866,DS-0ec1222b-f092-47e9-8f6a-728786e73d0a,DISK], DatanodeInfoWithStorage[172.19.0.4:9866,DS-09a6ff3c-aac0-4d9c-a66b-7171c3a1a81e,DISK]]
+6. BP-1054772319-172.19.0.3-1791753837554:blk_1073741831_1007 len=134217728 Live_repl=2  [DatanodeInfoWithStorage[172.19.0.5:9866,DS-0ec1222b-f092-47e9-8f6a-728786e73d0a,DISK], DatanodeInfoWithStorage[172.19.0.4:9866,DS-09a6ff3c-aac0-4d9c-a66b-7171c3a1a81e,DISK]]
+7. BP-1054772319-172.19.0.3-1791753837554:blk_1073741832_1008 len=134217728 Live_repl=2  [DatanodeInfoWithStorage[172.19.0.4:9866,DS-09a6ff3c-aac0-4d9c-a66b-7171c3a1a81e,DISK], DatanodeInfoWithStorage[172.19.0.5:9866,DS-0ec1222b-f092-47e9-8f6a-728786e73d0a,DISK]]
+
+
+Status: HEALTHY
+ Number of data-nodes:	2
+ Number of racks:		1
+ Total dirs:			1
+ Total symlinks:		0
+
+Replicated Blocks:
+ Total size:	1073741824 B
+ Total files:	1
+ Total blocks (validated):	8 (avg. block size 134217728 B)
+ Minimally replicated blocks:	8 (100.0 %)
+ Over-replicated blocks:	0 (0.0 %)
+ Under-replicated blocks:	0 (0.0 %)
+ Mis-replicated blocks:		0 (0.0 %)
+ Default replication factor:	1
+ Average block replication:	2.0
+ Missing blocks:		0
+ Corrupt blocks:		0
+ Missing replicas:		0 (0.0 %)
+
+Erasure Coded Block Groups:
+ Total size:	0 B
+ Total files:	0
+ Total block groups (validated):	0
+ Minimally erasure-coded block groups:	0
+ Over-erasure-coded block groups:	0
+ Under-erasure-coded block groups:	0
+ Unsatisfactory placement block groups:	0
+ Average block group size:	0.0
+ Missing block groups:		0
+ Corrupt block groups:		0
+ Missing internal blocks:	0
+FSCK ended at Sun Oct 11 22:11:15 GMT 2026 in 8 milliseconds
+
+
+The filesystem under path '/grupo05/dataset_1GB' is HEALTHY

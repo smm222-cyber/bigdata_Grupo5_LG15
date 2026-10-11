@@ -1,0 +1,8 @@
+﻿18:10:55 (+14,3 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0
+18:11:27 (+14,8 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0
+18:12:00 (+15,3 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0
+18:12:33 (+15,9 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0
+18:13:05 (+16,4 min) | Live datanodes (2): | Dead datanodes (1): | 	Under replicated blocks: 0
+18:13:38 (+17 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:14:10 (+17,5 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
+18:14:42 (+18 min) | Live datanodes (3): |  | 	Under replicated blocks: 0
