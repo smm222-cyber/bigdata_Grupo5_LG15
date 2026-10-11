@@ -1,0 +1,33 @@
+# LG15 - Grupo 05: 1 NameNode + 3 DataNodes
+# Imágenes del repositorio crs4/hadoop-docker (versión 3.2.1)
+services:
+  namenode:
+    image: crs4/namenode:3.2.1
+    container_name: grupo05-namenode
+    ports:
+      - "9870:9870"   # interfaz web del NameNode
+      - "8020:8020"   # RPC
+
+  datanode1:
+    image: crs4/datanode:3.2.1
+    container_name: grupo05-datanode1
+    environment:
+      - NAMENODE_HOSTNAME=namenode
+
+  datanode2:
+    image: crs4/datanode:3.2.1
+    container_name: grupo05-datanode2
+    environment:
+      - NAMENODE_HOSTNAME=namenode
+
+  datanode3:
+    image: crs4/datanode:3.2.1
+    container_name: grupo05-datanode3
+    environment:
+      - NAMENODE_HOSTNAME=namenode
+
+  client:
+    image: crs4/hadoopclient:3.2.1
+    container_name: grupo05-client
+    environment:
+      - NAMENODE_HOSTNAME=namenode
