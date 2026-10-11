@@ -206,7 +206,23 @@ Evidencias:
 
 ## 7. Tabla comparativa
 
-> **Pendiente:**
+> ## 6. Comparación entre los experimentos de 1 GB y 10 GB
+
+Comparamos las dos pruebas de tolerancia a fallos: se detuvo un DataNode con `docker stop` y se observó cómo HDFS mantiene el archivo disponible y restablece la replicación.
+
+| Característica | Dataset 1 GB | Dataset 10 GB |
+|---|---|---|
+| Tamaño | 1 GB (1 073 741 824 bytes) | 10 GB (10 737 418 240 bytes) |
+| Número de bloques | 8 (de 128 MB) | 80 |
+| Factor de replicación | 2 | 2 (promedio 2.0 antes de la falla) |
+| DataNode afectado | DN2 (172.19.0.6) | DN3 (172.19.0.5) |
+| Bloques afectados | 7 de 8 (los que tenían réplica en DN2) | 47 de 80 (58,75 %) |
+| Bloques disponibles después de la falla | 8 de 8: HEALTHY, Missing blocks 0 | 80 de 80: HEALTHY, 0 missing |
+| ¿Archivo accesible? | Sí. El md5 durante la falla es igual al de antes (`e4dc59f8…da07`) | Sí. Se leyeron los 10 737 418 240 bytes |
+| ¿Existieron bloques subreplicados? | Sí, 7 bloques quedaron con una sola réplica viva. Los contadores de HDFS siguieron en 0 (ver observaciones) | Sí, 47 bloques y promedio de replicación 1,41 durante la falla |
+| Tiempo de recuperación | Menos de 4,6 min tras declararse caído el DataNode (18:06:34 → ya recuperado a las 18:11:11) | ~7 min (declarado caído ~18:44, recuperado 18:51:09). Subreplicados: 47 → 21 → 2 → 0 |
+| Nuevas réplicas | 7 réplicas nuevas: 6 en DN1 (bloques 0 a 5) y 1 en DN3 (bloque 7). Quedó DN1 con 8 bloques y DN3 con 8 | Se recrearon en DN1 y DN2, los únicos nodos vivos. Promedio final 2.0 |
+
 
 ## 8. Respuestas a las 9 preguntas
 
